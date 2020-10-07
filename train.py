@@ -25,7 +25,16 @@ from models import create_model
 from util.visualizer import Visualizer
 
 if __name__ == '__main__':
+
     opt = TrainOptions().parse()   # get training options
+
+    # if some options have to be changed do this in the following
+    opt.n_epochs = 30
+    opt.n_epochs_decay = 30
+    opt.lr = 0.0002
+    opt.gan_mode = 'lsgan'
+    opt.batch_size = 1
+
     dataset = create_dataset(opt)  # create a dataset given opt.dataset_mode and other options
     dataset_size = len(dataset)    # get the number of images in the dataset.
     print('The number of training images = %d' % dataset_size)
