@@ -2,7 +2,9 @@
 .idea
 
 # checkpoints/results created during training and testing
-checkpoints/
+results/
 
 # pip
 Pipfile.lock
+
+defines.py

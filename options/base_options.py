@@ -18,38 +18,13 @@ class BaseOptions():
         """Reset the class; indicates the class hasn't been initailized"""
         self.initialized = False
 
-        self.name = 'HE_H.18.4262'
-        self.suffix = 'onlyE_onlyH_01'
-
-        if platform == "linux":
-            path1 = '/home/marlen/sds_hd/sd18a006/Marlen/'
-            path2 = '/home/mr38/sds_hd/sd18a006/Marlen/'
-            if Path(path1).exists():
-                self.sds_path = path1
-            elif Path(path2).exists():
-                self.sds_path = path2
-            else:
-                print('error: sds path cannot be defined! Abort')
-                exit(1)
-        elif platform == "win32":
-            path = '//lsdf02.urz.uni-heidelberg.de/sd18A006/Marlen/'
-            if Path(path).exists():
-                self.sds_path = path
-            else:
-                print('error: sds path cannot be defined! Abort')
-                exit(1)
-        else:
-            print('error: sds path cannot be defined! Abort')
-            exit(1)
-
     def initialize(self, parser):
         """Define the common options that are used in both training and test."""
         # basic parameters
-        parser.add_argument('--sds_path', type=str, default=self.sds_path, help='name of the experiment. It decides where to store samples and models')
-        parser.add_argument('--name', type=str, default=self.name, help='name of the experiment. It decides where to store samples and models')
-        parser.add_argument('--suffix', default=self.suffix, type=str, help='customized suffix: opt.name = opt.name + suffix: e.g., {model}_{netG}_size{load_size}')
-        parser.add_argument('--dataroot', required=False, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
-        parser.add_argument('--checkpoints_dir', required=False, help='models are saved here')
+        parser.add_argument('--dataroot', required=True, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
+        parser.add_argument('--name', type=str, required=True, help='name of the experiment. It decides where to store samples and models')
+        parser.add_argument('--results_dir', type=str, default='./results', help='saves results here.')
+        # parser.add_argument('--checkpoints_dir', required=False, help='models are saved here')
         parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
         # model parameters
         parser.add_argument('--model', type=str, default='cycle_gan', help='chooses which model to use. [cycle_gan | pix2pix | test | colorization]')
@@ -80,6 +55,7 @@ class BaseOptions():
         parser.add_argument('--epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')
         parser.add_argument('--load_iter', type=int, default='0', help='which iteration to load? if load_iter > 0, the code will load models by iter_[load_iter]; otherwise, the code will load models by [epoch]')
         parser.add_argument('--verbose', action='store_true', help='if specified, print more debugging information')
+        # parser.add_argument('--suffix', default='', type=str, help='customized suffix: opt.name = opt.name + suffix: e.g., {model}_{netG}_size{load_size}')
         self.initialized = True
         return parser
 
@@ -129,7 +105,7 @@ class BaseOptions():
         print(message)
 
         # save to the disk
-        expr_dir = os.path.join(opt.checkpoints_dir, opt.name)
+        expr_dir = Path(opt.results_dir, opt.name)
         util.mkdirs(expr_dir)
         file_name = os.path.join(expr_dir, '{}_opt.txt'.format(opt.phase))
         with open(file_name, 'wt') as opt_file:
@@ -141,26 +117,32 @@ class BaseOptions():
         opt = self.gather_options()
         opt.isTrain = self.isTrain   # train or test
 
-        if opt.dataroot == None or not Path(opt.dataroot).exists():
-            # get dataroot
-            if opt.isTrain:
-                opt.dataroot = opt.sds_path + '/pytorch_cycleGan_stainStyleTransfer/datasets/' + opt.name + '/train'
-            else:
-                opt.dataroot = opt.sds_path + '/pytorch_cycleGan_stainStyleTransfer/datasets/' + opt.name + '/test'
+        # if opt.dataroot == None or not Path(opt.dataroot).exists():
+        #     # get dataroot
+        #     if opt.isTrain:
+        #         opt.dataroot = '/pytorch_cycleGan_stainStyleTransfer/datasets/' + opt.name + '/train'
+        #     else:
+        #         opt.dataroot = '/pytorch_cycleGan_stainStyleTransfer/datasets/' + opt.name + '/test'
+        #
+        #     if not Path(opt.dataroot).exists():
+        #         print('error: dataroot path cannot be defined! Abort')
+        #         exit(1)
 
-            if not Path(opt.dataroot).exists():
-                print('error: dataroot path cannot be defined! Abort')
-                exit(1)
+        # # process opt.suffix
+        # if opt.suffix:
+        #     suffix = ('/' + opt.suffix.format(**vars(opt))) if opt.suffix != '' else ''
+        #     opt.name += suffix
 
-        # process opt.suffix
-        if opt.suffix:
-            suffix = ('/' + opt.suffix.format(**vars(opt))) if opt.suffix != '' else ''
-            opt.name += suffix
+        # numb = str(len(os.listdir(opt.results_dir)) + 1).zfill(2)
 
-        # set directories
-        if opt.checkpoints_dir == None or not Path(opt.checkpoints_dir).exists():
-            opt.checkpoints_dir = opt.sds_path + '/pytorch_cycleGan_stainStyleTransfer/checkpoints/'
-            # opt.checkpoints_dir = opt.sds_path + '/pytorch_cycleGan_stainStyleTransfer/checkpoints/' + opt.name + '/' + opt.suffix
+        opt.checkpoints_dir = Path(opt.results_dir, opt.name, 'checkpoints')
+        if not Path(opt.checkpoints_dir).exists():
+            util.mkdir(opt.checkpoints_dir)
+
+        # # set directories
+        # if opt.checkpoints_dir == None or not Path(opt.checkpoints_dir).exists():
+        #     opt.checkpoints_dir = '/pytorch_cycleGan_stainStyleTransfer/checkpoints/'
+        #     # opt.checkpoints_dir = '/pytorch_cycleGan_stainStyleTransfer/checkpoints/' + opt.name + '/' + opt.suffix
 
         # if opt.results_dir == None or not Path(opt.results_dir).exists():
         #     opt.results_dir = opt.checkpoints_dir + '/results'

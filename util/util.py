@@ -4,7 +4,8 @@ import torch
 import numpy as np
 from PIL import Image
 import os
-
+import sys
+import pathlib
 
 def tensor2im(input_image, imtype=np.uint8):
     """"Converts a Tensor array into a numpy image array.
@@ -101,3 +102,34 @@ def mkdir(path):
     """
     if not os.path.exists(path):
         os.makedirs(path)
+
+
+# retrieve correct path depending on os and sds
+def check_os(sds=False):
+    path = ''
+    if sys.platform == "linux":
+        if sds:
+            path = '/sds_hd/sd18a006/'
+        path1 = '/home/marlen/'
+        path2 = '/home/mr38/'
+        if pathlib.Path('/home/marlen/').exists():
+            return path1 + path
+        elif pathlib.Path('/home/mr38/').exists():
+            return path2 + path
+        else:
+            print('error: sds path cannot be defined! Abort')
+            return 1
+    elif sys.platform == "win32":
+        path = ''
+        if sds:
+            path = '//lsdf02.urz.uni-heidelberg.de/sd18A006/'
+        else:
+            path = 'C:/Users/mr38/'
+        if pathlib.Path(path).exists():
+            return path
+        else:
+            print('error: sds path cannot be defined! Abort')
+            return 1
+    else:
+        print('error: sds path cannot be defined! Abort')
+        return 1
