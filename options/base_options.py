@@ -136,7 +136,7 @@ class BaseOptions():
 
         # numb = str(len(os.listdir(opt.results_dir)) + 1).zfill(2)
 
-        opt.checkpoints_dir = Path(opt.results_dir, opt.name, 'checkpoints')
+        opt.checkpoints_dir = Path(opt.results_dir, opt.name)
         if not Path(opt.checkpoints_dir).exists():
             util.mkdir(opt.checkpoints_dir)
 
