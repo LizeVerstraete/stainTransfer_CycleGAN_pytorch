@@ -9,5 +9,3 @@ results/
 # pip
 Pipfile
 Pipfile.lock
-
-defines.py
