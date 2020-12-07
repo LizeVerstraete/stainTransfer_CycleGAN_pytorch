@@ -46,7 +46,9 @@ if __name__ == '__main__':
     model = create_model(opt)      # create a model given opt.model and other options
     model.setup(opt)               # regular setup: load and print networks; create schedulers
     # create a website
-    web_dir = os.path.join(opt.results_dir, opt.name, '{}_{}_{}'.format(opt.phase, opt.epoch, opt.suffix))  # define the website directory
+    web_dir = os.path.join(opt.results_dir, opt.name, '{}_{}'.format(opt.phase, opt.epoch))  # define the website directory
+    if opt.suffix != '':
+        web_dir += '_{}'.format(opt.suffix)
     if opt.load_iter > 0:  # load_iter is 0 by default
         web_dir = '{:s}_iter{:d}'.format(web_dir, opt.load_iter)
     print('creating web directory', web_dir)
