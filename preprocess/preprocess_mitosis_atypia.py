@@ -1,13 +1,7 @@
 import cv2
 import math
 import os
-
-
-def assure_path_exists(path):
-    dir = os.path.dirname(path)
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-
+from util.util import assure_path_exists
 
 def resize_image(img, x, y):
     dsize = (x, y)
@@ -24,14 +18,14 @@ if __name__ == '__main__':
     offs = 256 #int(tile - tile / 2)
     tile_size = (tile, tile)
     offset = (offs, offs)
-    # path to input
+    # build path to input
     task = "test"
     res = "x40"
-    letter = "A"
+    domain = "A"
     # nums = ["03", "04", "05", "07", "10", "11", "12", "14", "15", "17", "18"]
     nums = ["06", "08", "09", "13", "16"]
     for num in nums:
-        folder = letter + num
+        folder = domain + num
         input_dir = "Z:/Marlen/datasets/MITOS-ATYPIA-14/extract/" + task + "/" + folder + "/frames/" + res
         # path to output
         output_dir = "Z:/Marlen/datasets/MITOS-ATYPIA-14/train_test_256/" + res + "/" + folder + "_tilesize_" + str(256) + "_offset_" + str(offs) + "/"
