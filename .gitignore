@@ -1,9 +1,6 @@
 # pycharm
 .idea
 
-# checkpoints/results created during training and testing
-results/
-
 */**/__pycache__
 
 # pip
