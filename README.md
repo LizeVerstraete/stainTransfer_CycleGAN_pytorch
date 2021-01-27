@@ -1,4 +1,5 @@
-# Stain Normalization using CycleGAN in PyTorch
+# Stain Transformation using CycleGAN in PyTorch
+![exampleStainTransform](imgs/example_image_readme.png)
 
 [comment]: <> (**CycleGAN: [Project]&#40;https://junyanz.github.io/CycleGAN/&#41; |  [Paper]&#40;https://arxiv.org/pdf/1703.10593.pdf&#41; |  [Torch]&#40;https://github.com/junyanz/CycleGAN&#41; |)
 
@@ -26,13 +27,15 @@
 ### Installation
 
 - Clone this repo:
-```bash
-git clone https://github.com/m4ln/stainNormalization_CycleGAN_pytorch.git
-cd stainNormalization_CycleGAN_pytorch
-```
+    ```bash
+    git clone https://github.com/m4ln/stainNormalization_CycleGAN_pytorch.git
+    cd stainNormalization_CycleGAN_pytorch
+    ```
+- Some sample scripts are provided in `./scripts`. Before you can run them the first time, set execute permission via
+`chmod +x -R ./scripts/`
 
-- Install dependencies via [pip](https://pypi.org/project/pip/)
-  To install all dependecies you can simply run the command ``
+- Install dependencies via [pip](https://pypi.org/project/pip/)  
+`#!./scripts/install_deps.sh`
   - [PyTorch](https://pytorch.org/get-started/locally/)
   - [visdom](https://github.com/facebookresearch/visdom)
   - For all other dependencies, use the command  
@@ -75,13 +78,6 @@ This will combine each pair of images (A,B) into a single image file, ready for 
   - The test results will be saved to a html file here: `./results/{experiment_name}/test_latest/index.html`.
   - The (pre-)trained model is saved at `./results/{experiment_name}/latest_net_G_{AorB}.pth`.
   - The option `--model test` is used for generating results of CycleGAN only for one side. This option will automatically set `--dataset_mode single`, which only loads the images from one set. On the contrary, using `--model cycle_gan` requires loading and generating results in both directions, which is sometimes unnecessary. The results will be saved at `./results/`. Use `--results_dir {directory_path_to_save_result}` to specify the results directory.
-
-### Apply a pre-trained model (CycleGAN)
-
-- Then generate the results using
-```bash
-python test.py --dataroot datasets/horse2zebra/testA --name horse2zebra_pretrained --model test --no_dropout
-```
 
 ### pix2pix train/test
 
@@ -133,6 +129,9 @@ Please run `flake8 --ignore E501 .` and `python ./scripts/test_before_push.py` b
 [comment]: <> (})
 
 [comment]: <> (```)
+
+### Network architecture For Cycle A to B
+![scheme_AtoB](imgs/cycleGAN_scheme_AtoB.png)
 
 ### ToDo
 - [ ] Add publication citation
