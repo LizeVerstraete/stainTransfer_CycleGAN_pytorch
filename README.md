@@ -44,8 +44,10 @@ To train a model on your own dataset, you need to create a data folder with two 
   ```
   - To specify more test options, see the files in the directory `./options/test_options.py`
   - The test results will be saved to a html file here: `./results/{experiment_name}/test_latest/index.html`.
-  - The (pre-)trained model is saved at `./results/{experiment_name}/latest_net_G_{AorB}.pth`.
-  - The option `--model test` is used for generating results of CycleGAN only for one side. This option will automatically set `--dataset_mode single`, which only loads the images from one set. On the contrary, using `--model cycle_gan` requires loading and generating results in both directions, which is sometimes unnecessary. The results will be saved at `./results/`. Use `--results_dir {directory_path_to_save_result}` to specify the results directory.
+  - The (pre-)trained model is saved at `./results/{experiment_name}/latest_net_G_{A_or_B}.pth`.
+  - The option `--model test` is used for generating results of CycleGAN only for one side. This option will automatically set `--dataset_mode single`, which only loads the images from one set. In this case it might be neccesary to specify `--model_suffix "_{A_or_B}"` to find the correct models.  
+  On the contrary, using `--model cycle_gan` requires loading and generating results in both directions, which is sometimes unnecessary.
+  - The results will be saved at `./results/`. Use `--results_dir {directory_path_to_save_result}` to specify the results directory.
 
 ## [Training/Test Tips](docs/tips.md)
 Best practice for training and testing your models.
