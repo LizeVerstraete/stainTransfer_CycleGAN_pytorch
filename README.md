@@ -86,6 +86,7 @@ To help users better understand and use our code, we briefly overview the functi
 
 ### ToDo
 - [ ] Add publication citation
+- [ ] Add evaluation scripts 
 
 ## Acknowledgments
 The project is forked from [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).
