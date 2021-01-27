@@ -1,25 +1,8 @@
 # Stain Transformation using CycleGAN in PyTorch
-![exampleStainTransform](imgs/example_image_readme.png)
-
-[comment]: <> (**CycleGAN: [Project]&#40;https://junyanz.github.io/CycleGAN/&#41; |  [Paper]&#40;https://arxiv.org/pdf/1703.10593.pdf&#41; |  [Torch]&#40;https://github.com/junyanz/CycleGAN&#41; |)
-
-[comment]: <> ([Tensorflow Core Tutorial]&#40;https://www.tensorflow.org/tutorials/generative/cyclegan&#41; | [PyTorch Colab]&#40;https://colab.research.google.com/github/junyanz/pytorch-CycleGAN-and-pix2pix/blob/master/CycleGAN.ipynb&#41;**)
-
-[comment]: <> (<img src="https://junyanz.github.io/CycleGAN/images/teaser_high_res.jpg" width="800"/>)
-
-[comment]: <> (If you use this code for your research, please cite:)
-
-[comment]: <> (Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks.<br>)
-
-[comment]: <> ([Jun-Yan Zhu]&#40;https://www.cs.cmu.edu/~junyanz/&#41;\*,  [Taesung Park]&#40;https://taesung.me/&#41;\*, [Phillip Isola]&#40;https://people.eecs.berkeley.edu/~isola/&#41;, [Alexei A. Efros]&#40;https://people.eecs.berkeley.edu/~efros&#41;. In ICCV 2017. &#40;* equal contributions&#41; [[Bibtex]]&#40;https://junyanz.github.io/CycleGAN/CycleGAN.txt&#41;)
-
-
-[comment]: <> (Image-to-Image Translation with Conditional Adversarial Networks.<br>)
-
-[comment]: <> ([Phillip Isola]&#40;https://people.eecs.berkeley.edu/~isola&#41;, [Jun-Yan Zhu]&#40;https://www.cs.cmu.edu/~junyanz/&#41;, [Tinghui Zhou]&#40;https://people.eecs.berkeley.edu/~tinghuiz&#41;, [Alexei A. Efros]&#40;https://people.eecs.berkeley.edu/~efros&#41;. In CVPR 2017. [[Bibtex]]&#40;https://www.cs.cmu.edu/~junyanz/projects/pix2pix/pix2pix.bib&#41;)
+<img src="./imgs/example_image_readme.png" alt="example" width="600"/>
 
 ## Prerequisites
-- Linux, Windows or Mac OS
+- Linux OS
 - Python 3
 - CPU or NVIDIA GPU + CUDA CuDNN
 
@@ -131,7 +114,7 @@ Please run `flake8 --ignore E501 .` and `python ./scripts/test_before_push.py` b
 [comment]: <> (```)
 
 ### Network architecture For Cycle A to B
-![scheme_AtoB](imgs/cycleGAN_scheme_AtoB.png)
+<img src="./imgs/cycleGAN_scheme_AtoB.png" alt="schemeAtoB"/>
 
 ### ToDo
 - [ ] Add publication citation
