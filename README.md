@@ -1,4 +1,4 @@
-# Stain Transformation using CycleGAN in PyTorch
+# Stain Transfer using CycleGAN in PyTorch
 <img src="./imgs/example_image_readme.png" alt="example" width="600"/>
 
 ## Prerequisites
@@ -11,10 +11,10 @@
 
 - Clone this repo:
     ```bash
-    git clone https://github.com/m4ln/stainNormalization_CycleGAN_pytorch.git
-    cd stainNormalization_CycleGAN_pytorch
+    git clone https://github.com/m4ln/stainTransfer_CycleGAN_pytorch.git
+    cd stainTransfer_CycleGAN_pytorch
     ```
-- Some sample scripts are provided in `./scripts`. Before you can run them the first time, set execute permission via
+- Some sample scripts are provided in `./scripts`. Before you can run them the first time, set execute permission via  
 `chmod +x -R ./scripts/`
 
 - Install dependencies via [pip](https://pypi.org/project/pip/)  
@@ -26,9 +26,9 @@
     
 ## Prepare Your Dataset
 ### CycleGAN (unpaired datasets)
-To train a model on your own dataset, you need to create a data folder with two subdirectories `trainA` and `trainB` that contain images from domain A and B. You can test your model on your training set by setting `--phase train` in `test.py`. You can also create subdirectories `testA` and `testB` if you have test data.
+To train a model on your own dataset, you need to create a data folder with two subdirectories `trainA` and `trainB` that contain images from domain A and B (unaired). You can test your model on your training set by setting `--phase train` in `test.py`. You can also create subdirectories `testA` and `testB` if you have test data.
 
-###Pix2Pix (paired datasets)
+### Pix2Pix (paired datasets)
 We provide a python script to generate pix2pix training data in the form of pairs of images {A,B}, where A and B are two different depictions of the same underlying scene. For example, these might be pairs {label map, photo} or {bw image, color image}. Then we can learn to translate A to B or B to A:
 
 Create folder `/path/to/data` with subfolders `A` and `B`. `A` and `B` should each have their own subfolders `train`, `val`, `test`, etc. In `/path/to/data/A/train`, put training images in style A. In `/path/to/data/B/train`, put the corresponding images in style B. Repeat same for other data splits (`val`, `test`, etc).
@@ -42,7 +42,7 @@ python datasets/combine_A_and_B.py --fold_A /path/to/data/A --fold_B /path/to/da
 
 This will combine each pair of images (A,B) into a single image file, ready for training.
 
-### CycleGAN train/test
+### Training and Testing
 - Prepare your dataset as described above
 - To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097.
 - Train a model:
@@ -88,10 +88,6 @@ If you plan to implement custom models and dataset for your new applications, we
 
 ## [Code structure](docs/overview.md)
 To help users better understand and use our code, we briefly overview the functionality and implementation of each package and each module.
-
-## Pull Request
-You are always welcome to contribute to this repository by sending a [pull request](https://help.github.com/articles/about-pull-requests/).
-Please run `flake8 --ignore E501 .` and `python ./scripts/test_before_push.py` before you commit the code. Please also update the code structure [overview](docs/overview.md) accordingly if you add or remove files.
 
 [comment]: <> (## Citation)
 
