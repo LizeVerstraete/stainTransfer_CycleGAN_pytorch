@@ -1,2 +1,5 @@
 set -ex
-python test.py --dataroot ./datasets/facades/testB/ --name facades_pix2pix --model test --netG unet_256 --direction BtoA --dataset_mode single --norm batch
+START=$(date +%s.%N)
+python test.py --dataroot ./data --name short --model test --direction AtoB --model_suffix "_A" --dataset_mode single --no_dropout
+END=$(date +%s.%N)
+DIFF=$(echo "$END - $START" | bc)
