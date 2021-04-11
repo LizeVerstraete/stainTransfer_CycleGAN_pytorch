@@ -10,3 +10,5 @@ Pipfile.lock
 #datasets and results
 /datasets/test_bfore_push/
 /results/test_before_push_cyclegan/
+
+venv/
