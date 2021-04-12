@@ -31,7 +31,7 @@ data_transforms = {
     ]),
 }
 
-data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/camelyon16'
+data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/patchCamelyon'
 
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
