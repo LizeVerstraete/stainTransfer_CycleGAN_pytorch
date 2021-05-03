@@ -30,8 +30,12 @@ data_transforms = {
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
 }
+use_norm = True
 
-data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/patchCamelyon'
+if use_norm:
+    data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/stainGAN_camelyon16'
+else:
+    data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/patchCamelyon'
 
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
