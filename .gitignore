@@ -12,3 +12,5 @@ Pipfile.lock
 /results/test_before_push_cyclegan/
 
 venv/
+
+*.jpg
