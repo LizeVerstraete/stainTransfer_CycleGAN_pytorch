@@ -6,7 +6,11 @@ import shutil
 import glob
 
 #%% Creating Train / Val / Test folders (One time use)
-root_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/patchCamelyon'
+root_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches'
+folders = ['original',
+           'normalized_to_HE',
+           'normalized_to_tumorLymphnode_165']
+
 classes_dir = ['/tumor',
                '/normal']
 
@@ -17,58 +21,60 @@ val_ratio = 0.25
 test_ratio = 0
 
 #%% iterate over it
-for i in range(0, len(classes_dir)):
+for ifolder in folders:
 
-    #% counter section
-    print('folder ' + classes_dir[i] + ' started')
+    for i in range(0, len(classes_dir)):
 
-    #% prepare the directories
-    trainFolder = root_dir +'/train' + class_names[i]
-    if os.path.exists(trainFolder):
-        shutil.rmtree(trainFolder)
-    os.makedirs(trainFolder)
-    # validation folder
-    valFolder = root_dir +'/val' + class_names[i]
-    if os.path.exists(valFolder):
-        shutil.rmtree(valFolder)
-    os.makedirs(root_dir +'/val' + class_names[i])
-    # test folder
-    testFolder = root_dir +'/test' + class_names[i]
-    if os.path.exists(testFolder):
-        shutil.rmtree(testFolder)
-    os.makedirs(root_dir +'/test' + class_names[i])
+        #% counter section
+        print('folder ' + classes_dir[i] + ' started')
 
-    #% prepare the data
-    # Creating partitions of the data after shuffeling
-    src = root_dir + classes_dir[i]  # Folder to copy images from
+        #% prepare the directories
+        trainFolder = root_dir + "/" + ifolder + '/train' + class_names[i]
+        if os.path.exists(trainFolder):
+            shutil.rmtree(trainFolder)
+        os.makedirs(trainFolder)
+        # validation folder
+        valFolder = root_dir + "/" + ifolder +'/val' + class_names[i]
+        if os.path.exists(valFolder):
+            shutil.rmtree(valFolder)
+        os.makedirs(root_dir +"/" + ifolder + '/val' + class_names[i])
+        # test folder
+        testFolder = root_dir + "/" + ifolder +'/test' + class_names[i]
+        if os.path.exists(testFolder):
+            shutil.rmtree(testFolder)
+        os.makedirs(root_dir + "/" + ifolder +'/test' + class_names[i])
 
-    allFileNames = glob.glob(src + '/*.png')
-    np.random.shuffle(allFileNames)
-    train_FileNames, val_FileNames, test_FileNames = np.split(np.array(allFileNames),
-                                                              [int(len(allFileNames) * (1 - val_ratio + test_ratio)),
-                                                               int(len(allFileNames) * (1 - test_ratio))])
+        #% prepare the data
+        # Creating partitions of the data after shuffeling
+        src = root_dir + "/" + ifolder + classes_dir[i]  # Folder to copy images from
 
-    train_FileNames = [name for name in train_FileNames.tolist()]
-    val_FileNames = [name for name in val_FileNames.tolist()]
-    test_FileNames = [name for name in test_FileNames.tolist()]
+        allFileNames = glob.glob(src + '/*.png')
+        np.random.shuffle(allFileNames)
+        train_FileNames, val_FileNames, test_FileNames = np.split(np.array(allFileNames),
+                                                                  [int(len(allFileNames) * (1 - val_ratio + test_ratio)),
+                                                                   int(len(allFileNames) * (1 - test_ratio))])
 
-    print('Total images: ', len(allFileNames))
-    print('Training: ', len(train_FileNames))
-    print('Validation: ', len(val_FileNames))
-    print('Testing: ', len(test_FileNames))
+        train_FileNames = [name for name in train_FileNames.tolist()]
+        val_FileNames = [name for name in val_FileNames.tolist()]
+        test_FileNames = [name for name in test_FileNames.tolist()]
 
-    #% Copy-pasting images
-    for name in train_FileNames:
-        shutil.copy(name, root_dir + '/train' + class_names[i])
+        print('Total images: ', len(allFileNames))
+        print('Training: ', len(train_FileNames))
+        print('Validation: ', len(val_FileNames))
+        print('Testing: ', len(test_FileNames))
 
-    for name in val_FileNames:
-        shutil.copy(name, root_dir + '/val' + class_names[i])
+        #% Copy-pasting images
+        for name in train_FileNames:
+            shutil.copy(name, root_dir + "/" + ifolder + '/train' + class_names[i])
 
-    for name in test_FileNames:
-        shutil.copy(name, root_dir + '/test' + class_names[i])
+        for name in val_FileNames:
+            shutil.copy(name, root_dir + "/" + ifolder + '/val' + class_names[i])
 
-    #% counter section
-    print('folder ' + classes_dir[i] + ' finished')
-    print('folder ' + class_names[i]+ ' finished')
+        for name in test_FileNames:
+            shutil.copy(name, root_dir + "/" + ifolder + '/test' + class_names[i])
+
+        #% counter section
+        print('folder ' + classes_dir[i] + ' finished')
+        print('folder ' + class_names[i]+ ' finished')
 
 

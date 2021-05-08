@@ -17,7 +17,7 @@ import copy
 # Just normalization for validation
 data_transforms = {
     'train': transforms.Compose([
-        transforms.Resize([224,224]),
+        transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),
         transforms.RandomHorizontalFlip(),
         transforms.RandomVerticalFlip(),
         transforms.RandomRotation(180),
@@ -25,17 +25,19 @@ data_transforms = {
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
     'val': transforms.Compose([
-        transforms.Resize([224,224]),
+        transforms.RandomResizedCrop(224, scale=(0.7, 1.0)),
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
 }
-use_norm = True
+dataset2use = "original"
 
-if use_norm:
-    data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/stainGAN_camelyon16'
-else:
-    data_dir = '/home/cw9/sds_hd/sd18a006/Marlen/datasets/stainNormalization/patchCamelyon'
+if dataset2use == "original":
+    data_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/original'
+elif dataset2use == "normalized_to_HE":
+    data_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_HE'
+elif dataset2use == "normalized_to_tumorLymphnode_165":
+    data_dir = "/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_tumorLymphnode_165"
 
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
