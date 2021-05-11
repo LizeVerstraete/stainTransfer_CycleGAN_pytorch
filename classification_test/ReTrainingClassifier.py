@@ -30,7 +30,7 @@ data_transforms = {
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
 }
-dataset2use = "original"
+dataset2use = "normalized_to_tumorLymphnode_165"
 
 if dataset2use == "original":
     data_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/original'
@@ -192,7 +192,7 @@ def prep_database(inputSize):
 
     data_transforms = {
         'train': transforms.Compose([
-            transforms.Resize([inputSize,inputSize]),
+            transforms.RandomResizedCrop(inputSize, scale=(0.7, 1.0)),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.RandomRotation(180),
@@ -200,7 +200,7 @@ def prep_database(inputSize):
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ]),
         'val': transforms.Compose([
-            transforms.Resize([inputSize,inputSize]),
+            transforms.RandomResizedCrop(inputSize, scale=(0.7, 1.0)),
             transforms.ToTensor(),
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ]),
@@ -264,7 +264,7 @@ model_list = ['alex',
               'densenet121']
 model_list = ['ResNet152'] # scheinbar ein Problem mit den densenets ab 161?
 
-save_path = data_dir + '/trainedModels'
+#save_path = data_dir + '/trainedModels'
 
 #%% iterate over the model list
 for imodel in model_list:
@@ -302,6 +302,6 @@ for imodel in model_list:
                             num_epochs=50)
 
     #% save the model
-    torch.save(model_ft, save_path + '/model_' + imodel + '.pt')
+    torch.save(model_ft, data_dir+ '/model_' + imodel + '.pt')
 
 
