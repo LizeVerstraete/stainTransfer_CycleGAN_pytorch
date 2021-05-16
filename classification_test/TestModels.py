@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns; sns.set()
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import normalize
 import torch.nn as nn
 
 #%% define the datasets
@@ -17,10 +16,10 @@ list_datasets = ['/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/p
                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_tumorLymphnode_165',
                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/original',
                  '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/normalized_to_HE_165',
-                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/normalized_to_camelyon_165 ',
+                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/normalized_to_camelyon_165',
                  ]
-list_dataset_names = ['original_camelyon', 'normalized_to_HE', 'normalized_to_tumorLymphnode',
-                      'original_tumorLymphnode', 'normalized_to_HE', 'normalized_to_camelyon']
+list_dataset_names = ['camelyon_ori', 'camelyon_to_HE', 'normalized_to_tL',
+                      'tumorLymphnode_ori', 'tumorLymphnode_to_HE', 'tumorLymphnode_to_ca']
 
 list_models = ['/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/original/model_ResNet152.pt',
             '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_HE/model_ResNet152.pt',
@@ -88,6 +87,10 @@ for idataset, tdataset in enumerate(list_datasets):
     plt.savefig('DataBase_' + dataset2use + '.jpg')
     plt.show()
     plt.close()
+
+    n_normal = sum(map(lambda x : x == "normal", class_labels))
+    n_tumor = sum(map(lambda x: x == "tumor", class_labels))
+    print("n = " + str(n_normal) + " tiles without and n = " + str(n_tumor) + " tiles with tumor.")
 
     #%% iterate over the models
     from sklearn.metrics import cohen_kappa_score
