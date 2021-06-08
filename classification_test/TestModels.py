@@ -14,17 +14,21 @@ import torch.nn as nn
 list_datasets = ['/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/original',
                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_HE',
                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_tumorLymphnode_165',
+                '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_onlyH',
                 '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/original',
                  '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/normalized_to_HE_165',
                  '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/normalized_to_camelyon_165',
+                '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165/normalized_to_onlyH_165'
                  ]
-list_dataset_names = ['camelyon_ori', 'camelyon_to_HE', 'normalized_to_tL',
-                      'tumorLymphnode_ori', 'tumorLymphnode_to_HE', 'tumorLymphnode_to_ca']
+list_dataset_names = ['camelyon_ori', 'camelyon_to_HE', 'camelyon_to_tL', 'camelyon_to_H',
+                      'tumorLymphnode_ori', 'tumorLymphnode_to_HE', 'tumorLymphnode_to_ca', 'tumorLymphnode_to_H']
 
 list_models = ['/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/original/model_ResNet152.pt',
             '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_HE/model_ResNet152.pt',
-            '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_tumorLymphnode_165/model_ResNet152.pt']
-list_model_names = ['ResNet_original', "ResNet_normalized_to_HE", "ResNet_normalized_to_tumorLymphnode"]
+            '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_tumorLymphnode_165/model_ResNet152.pt',
+            '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_onlyH/model_ResNet152.pt' ]
+
+list_model_names = ['ResNet_original', "ResNet_normalized_to_HE", "ResNet_normalized_to_tumorLymphnode", "ResNet_normalized_to_H"]
 
 #%% iterate over all datasets (and later over all models)
 list_model = []
@@ -34,6 +38,7 @@ list_accuracy = []
 list_loss = []
 
 for idataset, tdataset in enumerate(list_datasets):
+    #print(idataset)
 
     #%% define the folder
     if tdataset.find("patches") > 0:
@@ -100,6 +105,7 @@ for idataset, tdataset in enumerate(list_datasets):
     df_values = pd.DataFrame(list(range(0,len(dataloaders[dataset2use].sampler.data_source.imgs))))
 
     for imodel, tmodel in enumerate(list_models):
+        print(imodel)
 
         #%% prepare the dataset
         inputSize = 224

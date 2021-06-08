@@ -30,7 +30,7 @@ data_transforms = {
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ]),
 }
-dataset2use = "normalized_to_tumorLymphnode_165"
+dataset2use = "normalized_to_onlyH"
 
 if dataset2use == "original":
     data_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/original'
@@ -38,6 +38,8 @@ elif dataset2use == "normalized_to_HE":
     data_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_HE'
 elif dataset2use == "normalized_to_tumorLymphnode_165":
     data_dir = "/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_tumorLymphnode_165"
+elif dataset2use == "normalized_to_onlyH":
+    data_dir = "/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches/normalized_to_onlyH"
 
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])

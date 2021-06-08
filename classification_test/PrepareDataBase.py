@@ -6,17 +6,19 @@ import shutil
 import glob
 
 #%% Creating Train / Val / Test folders (One time use)
-dataset = "tumorLymphnode"
+dataset = "camelyon"
 if dataset == "camelyon":
     root_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/patchCamelyon/patches'
     folders = ['original',
                'normalized_to_HE',
                'normalized_to_tumorLymphnode_165']
+    folders = ['normalized_to_onlyH']
 elif dataset == "tumorLymphnode":
     root_dir = '/home/cw9/sds_hd/sd18a006/marlen/datasets/stainNormalization/tumorLymphnode/patches/size_165'
     folders = ['original',
                'normalized_to_HE_165',
                'normalized_to_camelyon_165']
+    folders = ['normalized_to_onlyH_165']
 
 classes_dir = ['/tumor',
                '/normal']
