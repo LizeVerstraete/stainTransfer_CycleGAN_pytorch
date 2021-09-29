@@ -53,7 +53,7 @@ To train a model on your own dataset, you need to create a data folder with two 
 <img src="./imgs/cycleGAN_scheme_AtoB.png" alt="schemeAtoB"/>
 
 ## Citation
-If you use this project for your research, please cite our paper.
+If you use this project for your research, please cite our [paper](https://doi.org/10.1186/s13000-021-01126-y).
 ```
 @article{runz2021normalization,
 author = {Runz, Marlen and Rusche, Daniel and Schmidt, Stefan and Weihrauch, Martin and Hesser, Jürgen and Weis, Cleo-Aron},
