@@ -49,46 +49,39 @@ To train a model on your own dataset, you need to create a data folder with two 
   On the contrary, using `--model cycle_gan` requires loading and generating results in both directions, which is sometimes unnecessary.
   - The results will be saved at `./results/`. Use `--results_dir {directory_path_to_save_result}` to specify the results directory.
 
-## [Training/Test Tips](docs/tips.md)
-Best practice for training and testing your models.
-
-## [Frequently Asked Questions](docs/qa.md)
-Before you post a new question, please first look at the above Q & A and existing GitHub issues.
-
-## Custom Model and Dataset
-If you plan to implement custom models and dataset for your new applications, we provide a dataset [template](data/template_dataset.py) and a model [template](models/template_model.py) as a starting point.
-
-## [Code structure](docs/overview.md)
-To help users better understand and use our code, we briefly overview the functionality and implementation of each package and each module.
-
-[comment]: <> (## Citation)
-
-[comment]: <> (If you use this code for your research, please cite our paper.)
-
-[comment]: <> (```)
-
-[comment]: <> (@inproceedings{StainNormalizationCycleGAN,)
-
-[comment]: <> (  title={Normalization of HE-Stained Histological Images using Cycle-Consistent Generative Adversarial Networks},)
-
-[comment]: <> (  author={},)
-
-[comment]: <> (  booktitle={},)
-
-[comment]: <> (  year={})
-
-[comment]: <> (})
-
-[comment]: <> (```)
-
-### Network architecture For Cycle A to B
+## Network architecture For Cycle A to B
 <img src="./imgs/cycleGAN_scheme_AtoB.png" alt="schemeAtoB"/>
 
+## Citation
+If you use this project for your research, please cite our paper.
+```
+@article{runz2021normalization,
+author = {Runz, Marlen and Rusche, Daniel and Schmidt, Stefan and Weihrauch, Martin and Hesser, Jürgen and Weis, Cleo-Aron},
+title = {Normalization of HE-stained histological images using cycle consistent generative adversarial networks},
+journal = {Diagnostic Pathology},
+year = {2021},
+volume={16},
+pages={71},
+doi = {10.1186/s13000-021-01126-y}
+}
+```
+
+If you use our [datasets](https://doi.org/10.11588/data/8LKEZF), please cite.
+```
+@data{data/8LKEZF_2021,
+author = {Runz, Marlen and Weis, Cleo-Aron},
+publisher = {heiDATA},
+title = {{Normalization of HE-Stained Histological Images using Cycle Consistent Generative Adversarial Networks [Dataset]}},
+year = {2021},
+version = {V1},
+doi = {10.11588/data/8LKEZF},
+url = {https://doi.org/10.11588/data/8LKEZF}
+}
+```
+
 ### ToDo
-- [ ] Add publication citation
-- [ ] Add dataset url
 - [ ] Add evaluation scripts 
 
 ## Acknowledgments
 The project is forked from [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).
-Only a few parts are modified or added.
+Only a few parts are modified or added. Please refer to this project for more details on the project files.
