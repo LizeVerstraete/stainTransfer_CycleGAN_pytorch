@@ -1,7 +1,9 @@
 set -ex
-# set '--model_suffix _A' to test the model from A to B, or '_B' vice versa
 
-# normalize from Camelyon16 to HEV stain only
-#python test.py --dataroot /home/mr38/sds_hd/sd18a006/marlen/project_data/pytorch-cycleGan-stain-normalization/camelyon16classification/trainImages/test --name camelyon_onlyH_s256_c128 --model test --phase test --no_dropout --preprocess none --epoch 60 --suffix camelyon --num_test 10000 --model_suffix _A --results_dir /home/mr38/sds_hd/sd18a006/marlen/project_data/pytorch-cycleGan-stain-normalization/camelyon16classification/results/
-# HEV
-python test.py --dataroot /home/mr38/sds_hd/sd18a006/marlen/histoNorm/HEV/trainImages/train_test_sets/size1024_overlap341/test --suffix normalHE --name normalHE_to_onlyE_s1024_c64 --model test --phase test --no_dropout --preprocess none --epoch latest --num_test 100 --model_suffix _A --results_dir /home/mr38/sds_hd/sd18a006/marlen/histoNorm/HEV/trainImages/train_test_sets/size1024_overlap341/results/
+START=$(date +%s.%N)
+
+python test.py --dataroot {path_to_test_images} --name {name_of_experiment_set_in_training} --results_dir {path_to_results_set_in_training} --name {name_of_experiment_set_in_training} --model cycle_gan --phase test --no_dropout
+
+END=$(date +%s.%N)
+DIFF=$(echo "$END - $START" | bc)
+

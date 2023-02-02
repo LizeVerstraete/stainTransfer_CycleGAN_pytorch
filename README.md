@@ -30,6 +30,7 @@ To train a model on your own dataset, you need to create a data folder with two 
 ### Training and Testing
 - Prepare your dataset as described above
 - To view training results and loss plots, run `python -m visdom.server` and click the URL http://localhost:8097.
+- Scripts for training and testing are provided in `./scripts`
 - Train a model:
   ```bash
   #!./scripts/train_cyclegan.sh
