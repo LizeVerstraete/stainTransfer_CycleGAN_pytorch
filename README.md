@@ -86,3 +86,7 @@ url = {https://doi.org/10.11588/data/8LKEZF}
 ## Acknowledgments
 The project is forked from [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix).
 Only a few parts are modified or added. Please refer to this project for more details on the project files.
+
+## Bugfixes
+- **Error**: `AttributeError: Can't pickle local object 'get_transform.<locals>.<lambda>'`  
+  **Solution**: Set option `--num_workers 0` while training/testing.
